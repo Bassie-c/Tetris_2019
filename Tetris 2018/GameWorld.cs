@@ -51,7 +51,7 @@ class GameWorld
         {
             case GameState.Start:
 
-                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.K))
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Space))
                 {
                     GameStart();
                 }
@@ -138,9 +138,31 @@ class GameWorld
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         spriteBatch.Begin();
-        grid.Draw(gameTime, spriteBatch);
-        spriteBatch.DrawString(font, "Hello!", Vector2.Zero, Color.Blue);
+        switch (gameState)
+        {
+            case GameState.Start:
+                spriteBatch.DrawString(font, "Hoofdmenu", Vector2.Zero, Color.Blue);
+                break;
+
+            case GameState.Playing:
+                drawGame();
+                break;
+
+            case GameState.GameMenu:
+                drawGame();
+                break;
+
+            case GameState.GameOver:
+                break;
+        }
+        
         spriteBatch.End();
+
+        void drawGame()
+        {
+            grid.Draw(gameTime, spriteBatch);
+            spriteBatch.DrawString(font, "Gamedrawing", Vector2.Zero, Color.Blue);
+        }
     }
 
     public void Reset()
