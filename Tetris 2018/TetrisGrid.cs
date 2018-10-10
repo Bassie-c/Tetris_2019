@@ -11,7 +11,11 @@ class TetrisGrid
 
     /// The position at which this TetrisGrid should be drawn.
     Vector2 position;
+
+    
+    /// De kleurarray om blokken in de grid te tekenen.
     Color[,] colorGrid = new Color[10, 20];
+
     /// The number of grid elements in the x-direction.
     public int Width { get { return 10; } }
    
@@ -26,8 +30,20 @@ class TetrisGrid
     {
         emptyCell = TetrisGame.ContentManager.Load<Texture2D>("block");
         position = Vector2.Zero;
+
+        for (int i = 0; i < colorGrid.GetLength(0); i++)
+        {
+            for (int j = 0; j < colorGrid.GetLength(1); j++)
+            {
+                colorGrid[i, j] = Color.White;
+            }              
+        }
+ 
         Clear();
     }
+
+   
+
 
     /// <summary>
     /// Draws the grid on the screen.
@@ -43,7 +59,8 @@ class TetrisGrid
             for (int j = 0; j < Height * emptyCell.Height; j += emptyCell.Height)
             {
                 position.Y = j;
-                spriteBatch.Draw(emptyCell, position);
+                spriteBatch.Draw(emptyCell, position, colorGrid[i / emptyCell.Width, j / emptyCell.Height]);
+
             }
         }
 
@@ -58,4 +75,3 @@ class TetrisGrid
     {
     }
 }
-
