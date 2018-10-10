@@ -5,6 +5,11 @@ VisualStudioVersion = 15.0.28010.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tetris_2018", "Tetris 2018\Tetris_2018.csproj", "{80527DF2-F9E3-4571-8A4B-DA4DC3A0A971}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5E68060D-2D82-4AE0-8824-5C8E6A621714}"
+	ProjectSection(SolutionItems) = preProject
+		Method_Workplace.cs = Method_Workplace.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
