@@ -35,6 +35,11 @@ class GameWorld
     /// </summary>
     TetrisGrid grid;
 
+    /// <summary>
+    /// The score of the player.
+    /// </summary>
+    int score;
+
     public GameWorld()
     {
         random = new Random();
@@ -161,7 +166,7 @@ class GameWorld
         void drawGame()
         {
             grid.Draw(gameTime, spriteBatch);
-            spriteBatch.DrawString(font, "Gamedrawing", Vector2.Zero, Color.Blue);
+            spriteBatch.DrawString(font, "Score: " + score, new Vector2(500, 0), Color.Blue);
         }
     }
 
