@@ -61,7 +61,7 @@ class TetrisGame : Game
         inputHelper.Update(gameTime);
         gameWorld.HandleInput(gameTime, inputHelper);
         gameWorld.Update(gameTime);
-
+        
         // EXIT shortcut
         if (inputHelper.KeyDown(Microsoft.Xna.Framework.Input.Keys.Multiply))
         {
@@ -75,4 +75,3 @@ class TetrisGame : Game
         gameWorld.Draw(gameTime, spriteBatch);
     }
 }
-
