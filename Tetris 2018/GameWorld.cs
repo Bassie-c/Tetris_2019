@@ -40,6 +40,16 @@ class GameWorld
     /// </summary>
     int score;
 
+    /// <summary>
+    /// The block that can be controlled by the player.
+    /// </summary>
+    TetrisBlock activeBlock;
+
+    /// <summary>
+    /// The next block to be active.
+    /// </summary>
+    TetrisBlock queuedblock;
+
     public GameWorld()
     {
         random = new Random();
@@ -160,7 +170,7 @@ class GameWorld
             case GameState.GameOver:
                 break;
         }
-        
+
         spriteBatch.End();
 
         void drawGame()
