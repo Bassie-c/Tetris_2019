@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 /// <summary>
 /// A class for representing the Tetris playing grid.
 /// </summary>
-public class TetrisGrid
+class TetrisGrid
 {
     /// The sprite of a single empty cell in the grid.
     Texture2D emptyCell;
@@ -14,12 +14,12 @@ public class TetrisGrid
 
     /// The number of grid elements in the x-direction.
     public int Width { get { return 10; } }
-    
+
     /// The number of grid elements in the y-direction.
     public int Height { get { return 20; } }
 
     /// De kleurarray om blokken in de grid te tekenen.
-    Color[,] colorGrid = new Color[10 ,20];
+    Color[,] colorGrid;
 
     /// <summary>
     /// Creates a new TetrisGrid.
@@ -29,15 +29,12 @@ public class TetrisGrid
     {
         emptyCell = TetrisGame.ContentManager.Load<Texture2D>("block");
         position = Vector2.Zero;
+        colorGrid = new Color[Width, Height];
 
         /// Zet alle elementen op blank.
         for (int i = 0; i < colorGrid.GetLength(0); i++)
-        {
             for (int j = 0; j < colorGrid.GetLength(1); j++)
-            {
-                colorGrid[i, j] = Color.White;
-            }              
-        }
+                colorGrid[i, j] = Color.White; 
  
         Clear();
     }
@@ -61,8 +58,29 @@ public class TetrisGrid
         }
     }
 
-    //public void AddBlock(bool[] block, Color ){}
+    public void PlaceBlock(TetrisBlockM block)
+    {
+        for (int i = 0; i < 4; i++)
+            for (int j = 0; j < 4; j++)
+            {
+                if (block.Block[i, j])
+                    colorGrid[((int)position.X) + i, ((int)position.Y) + j] = block.Color;
+            }
+    }
 
+    /*
+    public void PlaceBlock(TetrisBlockM block)
+    {
+        for (int i = 0; i < 4; i++)
+            for (int j = 0; j < 4; j++)
+            {
+                if (block.Block[i, j])
+                    colorGrid[((int)position.X) + i, ((int)position.Y) + j] = block.Color;
+                    
+            }
+                
+    }
+    */
 
     /// <summary>
     /// Clears the grid.
