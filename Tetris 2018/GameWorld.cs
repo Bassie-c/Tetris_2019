@@ -101,7 +101,7 @@ class GameWorld
 
     public void Update(GameTime gameTime)
     {
-        
+
     }
 
     private void ResetSettings() // Stelt standaard settings in.
