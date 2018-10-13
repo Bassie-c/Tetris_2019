@@ -35,6 +35,8 @@ class GameWorld
     /// </summary>
     TetrisGrid grid;
 
+    TetrisBlockM tetrisBlockM;
+
     public GameWorld()
     {
         random = new Random();
@@ -43,6 +45,8 @@ class GameWorld
         font = TetrisGame.ContentManager.Load<SpriteFont>("SpelFont");
 
         grid = new TetrisGrid();
+
+        tetrisBlockM = new TetrisBlockM();
     }
 
     public void HandleInput(GameTime gameTime, InputHelper inputHelper)
@@ -101,7 +105,7 @@ class GameWorld
 
     public void Update(GameTime gameTime)
     {
-
+        tetrisBlockM.Update();
     }
 
     private void ResetSettings() // Stelt standaard settings in.
@@ -139,6 +143,7 @@ class GameWorld
     {
         spriteBatch.Begin();
         grid.Draw(gameTime, spriteBatch);
+        tetrisBlockM.Draw(gameTime, spriteBatch);
         spriteBatch.DrawString(font, "Hello!", Vector2.Zero, Color.Blue);
         spriteBatch.End();
     }

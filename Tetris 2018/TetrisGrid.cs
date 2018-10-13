@@ -30,12 +30,6 @@ class TetrisGrid
         emptyCell = TetrisGame.ContentManager.Load<Texture2D>("block");
         position = Vector2.Zero;
         colorGrid = new Color[Width, Height];
-
-        /// Zet alle elementen op blank.
-        for (int i = 0; i < colorGrid.GetLength(0); i++)
-            for (int j = 0; j < colorGrid.GetLength(1); j++)
-                colorGrid[i, j] = Color.White; 
- 
         Clear();
     }
 
@@ -63,29 +57,18 @@ class TetrisGrid
         for (int i = 0; i < 4; i++)
             for (int j = 0; j < 4; j++)
             {
-                if (block.Block[i, j])
-                    colorGrid[((int)position.X) + i, ((int)position.Y) + j] = block.Color;
+                if (block.block[i, j])
+                    colorGrid[((int)position.X) + i, ((int)position.Y) + j] = block.color;
             }
     }
-
-    /*
-    public void PlaceBlock(TetrisBlockM block)
-    {
-        for (int i = 0; i < 4; i++)
-            for (int j = 0; j < 4; j++)
-            {
-                if (block.Block[i, j])
-                    colorGrid[((int)position.X) + i, ((int)position.Y) + j] = block.Color;
-                    
-            }
-                
-    }
-    */
 
     /// <summary>
     /// Clears the grid.
     /// </summary>
     public void Clear()
     {
+        for (int i = 0; i < colorGrid.GetLength(0); i++)
+            for (int j = 0; j < colorGrid.GetLength(1); j++)
+                colorGrid[i, j] = Color.White;
     }
 }
