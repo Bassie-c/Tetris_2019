@@ -61,7 +61,33 @@ public class TetrisGrid
         }
     }
 
-    //public void AddBlock(bool[] block, Color ){}
+    public bool CheckBlock(int xChange, int yChange)
+    {
+        TetrisBlock block = TetrisGame.gameWorld.activeBlock;
+        for (int x = 0; x < block.block.GetLength(0); x++)
+        {
+            for (int y = 0; y < block.block.GetLength(1); y++)
+            {
+                if (block.block[x, y] && colorGrid[block.x + xChange + x, block.y + yChange + y] != Color.White)
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    public void PlaceBlock()
+    {
+        TetrisBlock block = TetrisGame.gameWorld.activeBlock;
+        for (int x = 0; x < block.block.GetLength(0); x++)
+        {
+            for (int y = 0; y < block.block.GetLength(1); y++)
+            {
+                if (block.block[x, y])
+                    colorGrid[block.x + x, block.y + y] = block.color;
+            }
+        }
+        TetrisGame.gameWorld.activeBlock = null;
+    }
 
 
     /// <summary>

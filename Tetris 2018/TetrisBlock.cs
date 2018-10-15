@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,49 +8,44 @@ using Microsoft.Xna.Framework.Graphics;
 
 class TetrisBlock
 {
-    protected bool[,] block;
-    protected Color color;
+    public bool[,] block;
+    public Color color;
     Texture2D emptyCell;
     public int x;
     public int y;
-
 
     /// <summary>
     /// The constructor of the TetrisBlock. Creates an array of false bools, notes the color of the block and loads the textures.
     /// </summary>
     /// <param name="color">The color of the block</param>
-    /// <param name="x">The size of the </param>
-    /// <param name="y"></param>
+    /// <param name="arrayX">The width of the array of the block</param>
+    /// <param name="arrayY">The height of the array of the block</param>
     public TetrisBlock(int arrayX, int arrayY, Color color)
     {
         block = new bool[arrayX, arrayY];
-        for (int x = 0; x <= arrayX - 1; x++)
-        {
-            for (int y = 0; y <= arrayY - 1; y++)
-            {
-                block[x, y] = false;
-            }
-        }
         this.color = color;
-        x = y = 0;
+        x = 4;
+        y = 0;
         emptyCell = TetrisGame.ContentManager.Load<Texture2D>("block");
     }
 
     public void MoveLeft()
     {
-        if (x > 0)
+        if (x > 0 && !TetrisGame.gameWorld.grid.CheckBlock(-1, 0))
             x--;
     }
 
     public void MoveRight()
     {
-        if (x < 10 - block.GetLength(0))
+        if (x < 10 - block.GetLength(0) && !TetrisGame.gameWorld.grid.CheckBlock(1, 0))
             x++;
     }
 
     public void MoveDown()
     {
-        if (y < 20)
+        if (y > 20 - block.GetLength(1) - 1 || TetrisGame.gameWorld.grid.CheckBlock(0, 1))
+            TetrisGame.gameWorld.grid.PlaceBlock();
+        else
             y++;
     }
 
@@ -89,9 +84,9 @@ class TetrisBlock
     /// </summary>
     /// <param name="gameTime"></param>
     /// <param name="spriteBatch"></param>
-    public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    public void Draw(GameTime gameTime, SpriteBatch spriteBatch, Vector2 position)
     {
-        Vector2 position = new Vector2(x * emptyCell.Width, y * emptyCell.Height);
+        position += new Vector2(x * emptyCell.Width, y * emptyCell.Height);
         for (int x = 0; x < block.GetLength(0); x++)
         {
             for (int y = 0; y < block.GetLength(1); y++)
@@ -179,4 +174,4 @@ class ZBlock : TetrisBlock
         block[1,1] = true;
         block[2,1] = true;
     }
-}
+}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           

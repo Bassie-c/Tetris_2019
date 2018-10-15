@@ -33,7 +33,7 @@ class GameWorld
     /// <summary>
     /// The main grid of the game.
     /// </summary>
-    TetrisGrid grid;
+    public TetrisGrid grid;
 
     /// <summary>
     /// The score of the player.
@@ -43,12 +43,12 @@ class GameWorld
     /// <summary>
     /// The block that can be controlled by the player.
     /// </summary>
-    TetrisBlock activeBlock;
+    public TetrisBlock activeBlock;
 
     /// <summary>
     /// The next block to be active.
     /// </summary>
-    TetrisBlock queuedblock;
+    TetrisBlock queuedBlock;
 
     public GameWorld()
     {
@@ -58,8 +58,6 @@ class GameWorld
         font = TetrisGame.ContentManager.Load<SpriteFont>("SpelFont");
 
         grid = new TetrisGrid();
-
-        activeBlock = new TBlock();
     }
 
     /// <summary>
@@ -102,7 +100,8 @@ class GameWorld
 
                 if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Up))
                 {
-
+                    while (activeBlock != null)
+                        activeBlock.MoveDown();
                 }
 
                 if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.A))
@@ -115,7 +114,7 @@ class GameWorld
                     activeBlock.RotateClockwise();
                 }
 
-                    // Quick GameOver debug cheat
+                // Quick GameOver debug cheat
                 if (inputHelper.KeyDown(Microsoft.Xna.Framework.Input.Keys.NumPad0))
                 {
                     GameOver();
@@ -153,7 +152,41 @@ class GameWorld
 
     public void Update(GameTime gameTime)
     {
+        if (activeBlock == null)
+        {
+            activeBlock = queuedBlock;
+            int r = random.Next(7);
+             switch (r)
+            {
+                case 0:
+                    queuedBlock = new IBlock();
+                    break;
 
+                case 1:
+                    queuedBlock = new JBlock();
+                    break;
+
+                case 2:
+                    queuedBlock = new LBlock();
+                    break;
+
+                case 3:
+                    queuedBlock = new OBlock();
+                    break;
+
+                case 4:
+                    queuedBlock = new SBlock();
+                    break;
+
+                case 5:
+                    queuedBlock = new TBlock();
+                    break;
+
+                case 6:
+                    queuedBlock = new ZBlock();
+                    break;
+            }
+        }
     }
 
     private void ResetSettings() // Stelt standaard settings in.
@@ -213,7 +246,8 @@ class GameWorld
         void drawGame()
         {
             grid.Draw(gameTime, spriteBatch);
-            activeBlock.Draw(gameTime, spriteBatch);
+            activeBlock.Draw(gameTime, spriteBatch, Vector2.Zero);
+            queuedBlock.Draw(gameTime, spriteBatch, new Vector2(400, 100));
             spriteBatch.DrawString(font, "Score: " + score, new Vector2(500, 0), Color.Blue);
         }
     }

@@ -7,7 +7,7 @@ class TetrisGame : Game
 {
     SpriteBatch spriteBatch;
     InputHelper inputHelper;
-    GameWorld gameWorld;
+    public static GameWorld gameWorld; //TODO: Waarom moet dit statisch zijn?
 
     /// <summary>
     /// A static reference to the ContentManager object, used for loading assets.
@@ -61,7 +61,7 @@ class TetrisGame : Game
         inputHelper.Update(gameTime);
         gameWorld.HandleInput(gameTime, inputHelper);
         gameWorld.Update(gameTime);
-        
+
         // EXIT shortcut
         if (inputHelper.KeyDown(Microsoft.Xna.Framework.Input.Keys.Multiply))
         {
