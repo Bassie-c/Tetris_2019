@@ -58,8 +58,14 @@ class GameWorld
         font = TetrisGame.ContentManager.Load<SpriteFont>("SpelFont");
 
         grid = new TetrisGrid();
+
+        activeBlock = new TBlock();
     }
 
+    /// <summary>
+    /// Handles all the player input.
+    /// <param name="gameTime"></param>
+    /// <param name="inputHelper"></param>
     public void HandleInput(GameTime gameTime, InputHelper inputHelper)
     {
         switch (gameState)
@@ -79,6 +85,37 @@ class GameWorld
                     OpenGameMenu();
                 }
 
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Left))
+                {
+                    activeBlock.MoveLeft();
+                }
+
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Right))
+                {
+                    activeBlock.MoveRight();
+                }
+
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Down))
+                {
+                    activeBlock.MoveDown();
+                }
+
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Up))
+                {
+
+                }
+
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.A))
+                {
+                    activeBlock.RotateCounterclockwise();
+                }
+
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.D))
+                {
+                    activeBlock.RotateClockwise();
+                }
+
+                    // Quick GameOver debug cheat
                 if (inputHelper.KeyDown(Microsoft.Xna.Framework.Input.Keys.NumPad0))
                 {
                     GameOver();
@@ -176,6 +213,7 @@ class GameWorld
         void drawGame()
         {
             grid.Draw(gameTime, spriteBatch);
+            activeBlock.Draw(gameTime, spriteBatch);
             spriteBatch.DrawString(font, "Score: " + score, new Vector2(500, 0), Color.Blue);
         }
     }

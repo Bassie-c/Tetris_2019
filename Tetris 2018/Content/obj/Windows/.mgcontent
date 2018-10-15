@@ -4,7 +4,7 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>D:/Programmeren/INFOB1GP/Tetris_2019/Tetris 2018/Content/SpelFont.spritefont</File>
-    <File>D:/Programmeren/INFOB1GP/Tetris_2019/Tetris 2018/Content/block.png</File>
+    <File>F:/Programmeren/AA UU/INFOB1GP/Tetris_2019/Tetris 2018/Content/SpelFont.spritefont</File>
+    <File>F:/Programmeren/AA UU/INFOB1GP/Tetris_2019/Tetris 2018/Content/block.png</File>
   </SourceFiles>
 </SourceFileCollection>

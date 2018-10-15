@@ -52,3 +52,30 @@ D:\Programmeren\INFOB1GP\Tetris_2019\Tetris 2018\obj\x86\Debug\Tetris_2018.cspro
 D:\Programmeren\INFOB1GP\Tetris_2019\Tetris 2018\obj\x86\Debug\Tetris_2018.csproj.CopyComplete
 D:\Programmeren\INFOB1GP\Tetris_2019\Tetris 2018\obj\x86\Debug\Tetris.exe
 D:\Programmeren\INFOB1GP\Tetris_2019\Tetris 2018\obj\x86\Debug\Tetris.pdb
+F:\Programmeren\AA UU\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\Content\block.xnb
+F:\Programmeren\AA UU\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\Content\SpelFont.xnb
+F:\Programmeren\AA UU\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\Tetris.exe
+F:\Programmeren\AA UU\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\Tetris.pdb
+F:\Programmeren\AA UU\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\MonoGame.Framework.dll
+F:\Programmeren\AA UU\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+F:\Programmeren\AA UU\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\SharpDX.dll
+F:\Programmeren\AA UU\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+F:\Programmeren\AA UU\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+F:\Programmeren\AA UU\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+F:\Programmeren\AA UU\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+F:\Programmeren\AA UU\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\SharpDX.XInput.dll
+F:\Programmeren\AA UU\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
+F:\Programmeren\AA UU\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\MonoGame.Framework.xml
+F:\Programmeren\AA UU\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+F:\Programmeren\AA UU\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\SharpDX.xml
+F:\Programmeren\AA UU\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+F:\Programmeren\AA UU\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+F:\Programmeren\AA UU\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+F:\Programmeren\AA UU\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+F:\Programmeren\AA UU\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\SharpDX.XInput.xml
+F:\Programmeren\AA UU\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
+F:\Programmeren\AA UU\INFOB1GP\Tetris_2019\Tetris 2018\obj\x86\Debug\Tetris_2018.csprojAssemblyReference.cache
+F:\Programmeren\AA UU\INFOB1GP\Tetris_2019\Tetris 2018\obj\x86\Debug\Tetris_2018.csproj.CoreCompileInputs.cache
+F:\Programmeren\AA UU\INFOB1GP\Tetris_2019\Tetris 2018\obj\x86\Debug\Tetris_2018.csproj.CopyComplete
+F:\Programmeren\AA UU\INFOB1GP\Tetris_2019\Tetris 2018\obj\x86\Debug\Tetris.exe
+F:\Programmeren\AA UU\INFOB1GP\Tetris_2019\Tetris 2018\obj\x86\Debug\Tetris.pdb
