@@ -44,7 +44,10 @@ class TetrisBlock
     public void MoveDown()
     {
         if (y > 20 - block.GetLength(1) - 1 || TetrisGame.gameWorld.grid.CheckBlock(0, 1))
+        {
             TetrisGame.gameWorld.grid.PlaceBlock();
+            TetrisGame.gameWorld.ResetBlockTimer();
+        }
         else
             y++;
     }

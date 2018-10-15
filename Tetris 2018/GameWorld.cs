@@ -50,6 +50,16 @@ class GameWorld
     /// </summary>
     TetrisBlock queuedBlock;
 
+    /// <summary>
+    /// The timer for moving the block down.
+    /// </summary>
+    float blockTimer;
+
+    /// <summary>
+    /// The current level the player is playing at.
+    /// </summary>
+    int level;
+
     public GameWorld()
     {
         random = new Random();
@@ -152,41 +162,73 @@ class GameWorld
 
     public void Update(GameTime gameTime)
     {
-        if (activeBlock == null)
+        switch (gameState)
         {
-            activeBlock = queuedBlock;
-            int r = random.Next(7);
-             switch (r)
-            {
-                case 0:
-                    queuedBlock = new IBlock();
-                    break;
+            case GameState.Start:
+                break;
 
-                case 1:
-                    queuedBlock = new JBlock();
-                    break;
+            case GameState.Playing:
+                blockTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-                case 2:
-                    queuedBlock = new LBlock();
-                    break;
+                if (blockTimer <= 0)
+                {
+                    activeBlock.MoveDown();
+                    ResetBlockTimer();
+                }
 
-                case 3:
-                    queuedBlock = new OBlock();
-                    break;
+                if (activeBlock == null)
+                {
+                    activeBlock = queuedBlock;
+                    NewBlock();
+                }
+                break;
 
-                case 4:
-                    queuedBlock = new SBlock();
-                    break;
+            case GameState.GameMenu:
+                break;
 
-                case 5:
-                    queuedBlock = new TBlock();
-                    break;
-
-                case 6:
-                    queuedBlock = new ZBlock();
-                    break;
-            }
+            case GameState.GameOver:
+                break;
         }
+    }
+
+    private void NewBlock()
+    {
+        int r = random.Next(7);
+        switch (r)
+        {
+            case 0:
+                queuedBlock = new IBlock();
+                break;
+
+            case 1:
+                queuedBlock = new JBlock();
+                break;
+
+            case 2:
+                queuedBlock = new LBlock();
+                break;
+
+            case 3:
+                queuedBlock = new OBlock();
+                break;
+
+            case 4:
+                queuedBlock = new SBlock();
+                break;
+
+            case 5:
+                queuedBlock = new TBlock();
+                break;
+
+            case 6:
+                queuedBlock = new ZBlock();
+                break;
+        }
+    }
+
+    public void ResetBlockTimer()
+    {
+        blockTimer = (float)(1 - 0.2 * Math.Pow(level, 0.5));
     }
 
     private void ResetSettings() // Stelt standaard settings in.
@@ -202,6 +244,11 @@ class GameWorld
 
     private void GameStart()
     {
+        NewBlock();
+        activeBlock = queuedBlock;
+        NewBlock();
+        level = 1;
+        ResetBlockTimer();
         gameState = GameState.Playing;
     }
 
@@ -249,6 +296,7 @@ class GameWorld
             activeBlock.Draw(gameTime, spriteBatch, Vector2.Zero);
             queuedBlock.Draw(gameTime, spriteBatch, new Vector2(400, 100));
             spriteBatch.DrawString(font, "Score: " + score, new Vector2(500, 0), Color.Blue);
+            spriteBatch.DrawString(font, "Level: " + level, new Vector2(500, 40), Color.Blue);
         }
     }
 
