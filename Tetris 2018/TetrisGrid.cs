@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Audio;
 
 /// <summary>
 /// A class for representing the Tetris playing grid.
@@ -8,6 +9,12 @@ public class TetrisGrid
 {
     /// The sprite of a single empty cell in the grid.
     Texture2D emptyCell;
+
+    // The soundefects of placing a block
+    SoundEffect placeBlock_1;
+    SoundEffect placeBlock_2;
+    SoundEffect placeBlock_3;
+    SoundEffect placeBlock_4;
 
     /// The position at which this TetrisGrid should be drawn.
     Vector2 position;
@@ -28,6 +35,10 @@ public class TetrisGrid
     public TetrisGrid()
     {
         emptyCell = TetrisGame.ContentManager.Load<Texture2D>("block");
+        placeBlock_1 = TetrisGame.ContentManager.Load<SoundEffect>("PlaceBlock_1");
+        placeBlock_2 = TetrisGame.ContentManager.Load<SoundEffect>("PlaceBlock_2");
+        placeBlock_3 = TetrisGame.ContentManager.Load<SoundEffect>("PlaceBlock_3");
+        placeBlock_4 = TetrisGame.ContentManager.Load<SoundEffect>("PlaceBlock_4");
         position = Vector2.Zero;
 
         /// Zet alle elementen op blank.
@@ -77,6 +88,25 @@ public class TetrisGrid
 
     public void PlaceBlock()
     {
+        int random = GameWorld.Random.Next(1, 4);
+        switch (random)
+        {
+            case 1:
+                placeBlock_1.Play();
+                break;
+
+            case 2:
+                placeBlock_2.Play();
+                break;
+
+            case 3:
+                placeBlock_3.Play();
+                break;
+
+            case 4:
+                placeBlock_4.Play();
+                break;
+        }
         TetrisBlock block = TetrisGame.gameWorld.activeBlock;
         for (int x = 0; x < block.block.GetLength(0); x++)
         {

@@ -79,3 +79,16 @@ F:\Programmeren\AA UU\INFOB1GP\Tetris_2019\Tetris 2018\obj\x86\Debug\Tetris_2018
 F:\Programmeren\AA UU\INFOB1GP\Tetris_2019\Tetris 2018\obj\x86\Debug\Tetris_2018.csproj.CopyComplete
 F:\Programmeren\AA UU\INFOB1GP\Tetris_2019\Tetris 2018\obj\x86\Debug\Tetris.exe
 F:\Programmeren\AA UU\INFOB1GP\Tetris_2019\Tetris 2018\obj\x86\Debug\Tetris.pdb
+D:\Programmeren\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\Content\GameOver.xnb
+D:\Programmeren\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\Content\LevelUp.xnb
+D:\Programmeren\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\Content\PlaceBlock_1.xnb
+D:\Programmeren\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\Content\PlaceBlock_2.xnb
+D:\Programmeren\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\Content\PlaceBlock_3.xnb
+D:\Programmeren\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\Content\PlaceBlock_4.xnb
+D:\Programmeren\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\Content\PlaceBlock_5.xnb
+D:\Programmeren\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\Content\Laendler_in_C_Minor_Hess_68.wma
+D:\Programmeren\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\Content\Laendler_in_C_Minor_Hess_68.xnb
+D:\Programmeren\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\Content\Gentle_Breeze.wma
+D:\Programmeren\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\Content\Gentle_Breeze.xnb
+D:\Programmeren\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\Content\Sunstroke.wma
+D:\Programmeren\INFOB1GP\Tetris_2019\Tetris 2018\bin\Windows\x86\Debug\Content\Sunstroke.xnb

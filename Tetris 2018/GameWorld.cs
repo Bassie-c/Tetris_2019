@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 using System;
 
 /// <summary>
@@ -60,14 +62,27 @@ class GameWorld
     /// </summary>
     int level;
 
+    /// <summary>
+    /// The timer that keeps track of how long the active song will last.
+    /// </summary>
+    float musicTimer;
+
+    /// <summary>
+    /// Sound effect for entering the GameOver screen.
+    /// </summary>
+    SoundEffect gameOver;
+
     public GameWorld()
     {
         random = new Random();
         gameState = GameState.Start;
 
         font = TetrisGame.ContentManager.Load<SpriteFont>("SpelFont");
+        gameOver = TetrisGame.ContentManager.Load<SoundEffect>("GameOver");
 
         grid = new TetrisGrid();
+
+        MediaPlayer.Volume = 0.1f;
     }
 
     /// <summary>
@@ -165,6 +180,7 @@ class GameWorld
         switch (gameState)
         {
             case GameState.Start:
+                MusicPlayer(gameTime);
                 break;
 
             case GameState.Playing:
@@ -181,14 +197,38 @@ class GameWorld
                     activeBlock = queuedBlock;
                     NewBlock();
                 }
+                MusicPlayer(gameTime);
                 break;
 
             case GameState.GameMenu:
+                MusicPlayer(gameTime);
                 break;
 
             case GameState.GameOver:
                 break;
         }
+    }
+
+    private void MusicPlayer(GameTime gameTime)
+    {
+        if (musicTimer < 0)
+        {
+            int newSong = Random.Next(2);
+            switch (newSong)
+            {
+                case 0:
+                    MediaPlayer.Play(TetrisGame.ContentManager.Load<Song>("Gentle_Breeze"));
+                    musicTimer = 101f;
+                    break;
+
+                case 1:
+                    MediaPlayer.Play(TetrisGame.ContentManager.Load<Song>("Sunstroke"));
+                    musicTimer = 112f;
+                    break;
+            }
+        }
+        else
+            musicTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
     }
 
     private void NewBlock()
@@ -264,6 +304,9 @@ class GameWorld
 
     private void GameOver()
     {
+        gameOver.Play();
+        musicTimer = 0f;
+        MediaPlayer.Play(TetrisGame.ContentManager.Load<Song>("Laendler_in_C_Minor_Hess_68"));
         gameState = GameState.GameOver;
     }
 
