@@ -33,9 +33,32 @@ class GameWorld
     /// <summary>
     /// The main grid of the game.
     /// </summary>
-    TetrisGrid grid;
+    public TetrisGrid grid;
 
-    TetrisBlockM tetrisBlockM;
+    /// <summary>
+    /// The score of the player.
+    /// </summary>
+    int score;
+
+    /// <summary>
+    /// The block that can be controlled by the player.
+    /// </summary>
+    public TetrisBlock activeBlock;
+
+    /// <summary>
+    /// The next block to be active.
+    /// </summary>
+    TetrisBlock queuedBlock;
+
+    /// <summary>
+    /// The timer for moving the block down.
+    /// </summary>
+    float blockTimer;
+
+    /// <summary>
+    /// The current level the player is playing at.
+    /// </summary>
+    int level;
 
     public GameWorld()
     {
@@ -44,18 +67,20 @@ class GameWorld
 
         font = TetrisGame.ContentManager.Load<SpriteFont>("SpelFont");
 
-        grid = new TetrisGrid();
-
-        tetrisBlockM = new TetrisBlockM();
+        grid = new TetrisGrid();       
     }
 
+    /// <summary>
+    /// Handles all the player input.
+    /// <param name="gameTime"></param>
+    /// <param name="inputHelper"></param>
     public void HandleInput(GameTime gameTime, InputHelper inputHelper)
     {
         switch (gameState)
         {
             case GameState.Start:
 
-                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.K))
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Space))
                 {
                     GameStart();
                 }
@@ -68,6 +93,38 @@ class GameWorld
                     OpenGameMenu();
                 }
 
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Left))
+                {
+                    activeBlock.MoveLeft();
+                }
+
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Right))
+                {
+                    activeBlock.MoveRight();
+                }
+
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Down))
+                {
+                    activeBlock.MoveDown();
+                }
+
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Up))
+                {
+                    while (activeBlock != null)
+                        activeBlock.MoveDown();
+                }
+
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.A))
+                {
+                    activeBlock.RotateCounterclockwise();
+                }
+
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.D))
+                {
+                    activeBlock.RotateClockwise();
+                }
+
+                // Quick GameOver debug cheat
                 if (inputHelper.KeyDown(Microsoft.Xna.Framework.Input.Keys.NumPad0))
                 {
                     GameOver();
@@ -105,12 +162,79 @@ class GameWorld
 
     public void Update(GameTime gameTime)
     {
-        tetrisBlockM.Update();
+        switch (gameState)
+        {
+            case GameState.Start:
+                break;
+
+            case GameState.Playing:
+                blockTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                if (blockTimer <= 0)
+                {
+                    activeBlock.MoveDown();
+                    ResetBlockTimer();
+                }
+
+                if (activeBlock == null)
+                {
+                    activeBlock = queuedBlock;
+                    NewBlock();
+                }
+                break;
+
+            case GameState.GameMenu:
+                break;
+
+            case GameState.GameOver:
+                break;
+        }
+    }
+
+    private void NewBlock()
+    {
+        int r = random.Next(7);
+        switch (r)
+        {
+            case 0:
+                queuedBlock = new IBlock();
+                break;
+
+            case 1:
+                queuedBlock = new JBlock();
+                break;
+
+            case 2:
+                queuedBlock = new LBlock();
+                break;
+
+            case 3:
+                queuedBlock = new OBlock();
+                break;
+
+            case 4:
+                queuedBlock = new SBlock();
+                break;
+
+            case 5:
+                queuedBlock = new TBlock();
+                break;
+
+            case 6:
+                queuedBlock = new ZBlock();
+                break;
+        }
+    }
+
+    public void ResetBlockTimer()
+    {
+        blockTimer = (float)(1 - 0.2 * Math.Pow(level, 0.5));
     }
 
     private void ResetSettings() // Stelt standaard settings in.
     {
-
+        level = 1;
+        score = 0;
     }
 
     // Methodes that handle the gamestate
@@ -121,6 +245,11 @@ class GameWorld
 
     private void GameStart()
     {
+        NewBlock();
+        activeBlock = queuedBlock;
+        NewBlock();
+        level = 1;
+        ResetBlockTimer();
         gameState = GameState.Playing;
     }
 
@@ -142,10 +271,37 @@ class GameWorld
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         spriteBatch.Begin();
+
         grid.Draw(gameTime, spriteBatch);
-        tetrisBlockM.Draw(gameTime, spriteBatch);
-        spriteBatch.DrawString(font, "Hello!", Vector2.Zero, Color.Blue);
+
+        switch (gameState)
+        {
+            case GameState.Start:
+                spriteBatch.DrawString(font, "Hoofdmenu", new Vector2(97, 0), Color.Blue);
+                break;
+
+            case GameState.Playing:
+                drawGame();
+                break;
+
+            case GameState.GameMenu:
+                drawGame();
+                break;
+
+            case GameState.GameOver:
+                break;
+        }
+
         spriteBatch.End();
+
+        void drawGame()
+        {
+            grid.Draw(gameTime, spriteBatch);
+            activeBlock.Draw(gameTime, spriteBatch, Vector2.Zero);
+            queuedBlock.Draw(gameTime, spriteBatch, new Vector2(400, 100));
+            spriteBatch.DrawString(font, "Score: " + score, new Vector2(500, 0), Color.Blue);
+            spriteBatch.DrawString(font, "Level: " + level, new Vector2(500, 40), Color.Blue);
+        }
     }
 
     public void Reset()

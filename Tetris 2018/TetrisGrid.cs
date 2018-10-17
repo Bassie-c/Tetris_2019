@@ -52,14 +52,35 @@ class TetrisGrid
         }
     }
 
-    public void PlaceBlock(TetrisBlockM block)
+
+    public void PlaceBlock(TetrisBlock block)
     {
-        for (int i = 0; i < 4; i++)
-            for (int j = 0; j < 4; j++)
-            {
+        for (int i = 0; i < block.block.GetLength(0); i++)
+            for (int j = 0; j < block.block.GetLength(1); j++)
                 if (block.block[i, j])
-                    colorGrid[((int)position.X) + i, ((int)position.Y) + j] = block.color;
-            }
+                    colorGrid[((int)position.X) + i, ((int)position.Y) + j] = block.color;            
+    }
+
+    public bool CheckBlock(int xChange, int yChange)
+    {
+        TetrisBlock block = TetrisGame.gameWorld.activeBlock;
+        for (int x = 0; x < block.block.GetLength(0); x++)        
+            for (int y = 0; y < block.block.GetLength(1); y++)            
+                if (block.block[x, y] && colorGrid[block.x + xChange + x, block.y + yChange + y] != Color.White)
+                    return true;            
+        return false;
+    }
+    /// <summary>
+    /// Places a block on the grid.
+    /// </summary>
+    public void PlaceBlock()
+    {
+        TetrisBlock block = TetrisGame.gameWorld.activeBlock;
+        for (int x = 0; x < block.block.GetLength(0); x++)
+            for (int y = 0; y < block.block.GetLength(1); y++)
+                if (block.block[x, y])
+                    colorGrid[block.x + x, block.y + y] = block.color;       
+        TetrisGame.gameWorld.activeBlock = null;
     }
 
     /// <summary>

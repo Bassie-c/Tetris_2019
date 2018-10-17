@@ -1,6 +1,11 @@
 Tetris 2018/obj/x86/Debug/
 Tetris 2018/.vs/
+<<<<<<< HEAD
+.vs/
+Tetris 2018/bin/Windows/x86/Debug/
+=======
 .vs/Tetris_2018/v15/Server/sqlite3/storage.ide-wal
 .vs/Tetris_2018/v15/Server/sqlite3/storage.ide-shm
 .vs/Tetris_2018/v15/Server/sqlite3/storage.ide
 .vs/Tetris_2018/v15/Server/sqlite3/db.lock
+>>>>>>> master
