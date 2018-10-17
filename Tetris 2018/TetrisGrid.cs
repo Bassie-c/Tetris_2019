@@ -81,6 +81,66 @@ class TetrisGrid
                 if (block.block[x, y])
                     colorGrid[block.x + x, block.y + y] = block.color;       
         TetrisGame.gameWorld.activeBlock = null;
+        CheckRow();
+    }
+
+    public void CheckRow()
+    {
+        for (int i = 0; i < Height; i++)
+            if (IsRowFull(i))
+            {
+                RemoveRow(i);
+                GivePoints(1);
+            }
+                
+    }
+    /// <summary>
+    /// Checks if a row is full. 
+    /// </summary>
+    /// <param name="j"></param>
+    /// <returns></returns>
+    public bool IsRowFull(int j)
+    {
+        for (int i = 0; i < Width; i++)
+            {
+                if (colorGrid[i, j] == Color.White)
+                    return false;
+            }
+        return true;              
+    }
+
+    public void RemoveRow(int y)
+    {
+        for (int i = 0; i < Width; i++)
+            for (int j = y; j > 0; j--)
+                colorGrid[i, j] = colorGrid[i, j - 1];
+        for (int i = 0; i < 0; i++)
+            colorGrid[i, 0] = Color.White;
+    }
+    /// <summary>
+    /// Geeft punten op basis van aantal weggehaalde rijen
+    /// </summary>
+    /// <param name="x"></param>
+    public void GivePoints(int x)
+    {
+        switch (x)
+        {
+            case 1:
+                TetrisGame.gameWorld.Score += 50;
+                break;
+
+            case 2:
+                TetrisGame.gameWorld.Score += 200;
+                break;
+
+            case 3:
+                TetrisGame.gameWorld.Score += 500;
+                break;
+
+            case 4:
+                TetrisGame.gameWorld.Score += 2000;
+                break;
+        }
     }
 
     /// <summary>

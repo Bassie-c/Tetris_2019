@@ -23,6 +23,9 @@ class TetrisBlock
     public TetrisBlock(int arrayX, int arrayY, Color color)
     {
         block = new bool[arrayX, arrayY];
+        for (int i = 0; i < arrayX; i++)
+            for (int j = 0; j < arrayY; j++)
+                block[i, j] = false;
         this.color = color;
         x = 4;
         y = 0;
@@ -90,10 +93,10 @@ class TetrisBlock
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch, Vector2 position)
     {
         position += new Vector2(x * emptyCell.Width, y * emptyCell.Height);
-        for (int x = 0; x < block.GetLength(0); x++)        
-            for (int y = 0; y < block.GetLength(1); y++)            
-                if (block[x, y])
-                    spriteBatch.Draw(emptyCell, position + new Vector2(x * emptyCell.Width, y * emptyCell.Height), color);            
+        for (int i = 0; i < block.GetLength(0); i++)        
+            for (int j = 0; j < block.GetLength(1); j++)            
+                if (block[i, j])
+                    spriteBatch.Draw(emptyCell, position + new Vector2(i * emptyCell.Width, j * emptyCell.Height), color);    
     }
 }
 

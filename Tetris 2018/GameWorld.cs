@@ -40,6 +40,12 @@ class GameWorld
     /// </summary>
     int score;
 
+    public int Score
+    {
+        get { return score; }
+        set { score = value; }
+    }
+
     /// <summary>
     /// The block that can be controlled by the player.
     /// </summary>
@@ -64,10 +70,10 @@ class GameWorld
     {
         random = new Random();
         gameState = GameState.Start;
-
+        grid = new TetrisGrid();           
         font = TetrisGame.ContentManager.Load<SpriteFont>("SpelFont");
-
-        grid = new TetrisGrid();       
+        score = 0;
+        level = 1;
     }
 
     /// <summary>
@@ -162,6 +168,8 @@ class GameWorld
 
     public void Update(GameTime gameTime)
     {
+
+
         switch (gameState)
         {
             case GameState.Start:
