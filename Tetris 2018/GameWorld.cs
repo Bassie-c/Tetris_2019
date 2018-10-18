@@ -54,7 +54,7 @@ class GameWorld
     /// <summary>
     /// The next block to be active.
     /// </summary>
-    TetrisBlock queuedBlock;
+    public TetrisBlock queuedBlock;
 
     /// <summary>
     /// The timer for moving the block down.
@@ -94,55 +94,37 @@ class GameWorld
 
             case GameState.Playing:
 
-                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Escape))
-                {
-                    OpenGameMenu();
-                }
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Escape))                
+                    OpenGameMenu();                
 
-                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Left))
-                {
-                    activeBlock.MoveLeft();
-                }
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Left))                
+                    activeBlock.MoveLeft();                
 
-                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Right))
-                {
-                    activeBlock.MoveRight();
-                }
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Right))                
+                    activeBlock.MoveRight();                
 
-                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Down))
-                {
-                    activeBlock.MoveDown();
-                }
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Down))                
+                    activeBlock.MoveDown();                
 
-                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Up))
-                {
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Up))                
                     while (activeBlock != null)
-                        activeBlock.MoveDown();
-                }
+                        activeBlock.MoveDown();                
 
-                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.A))
-                {
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.A))                
                     activeBlock.RotateCounterclockwise();
-                }
 
-                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.D))
-                {
-                    activeBlock.RotateClockwise();
-                }
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.D))                
+                    activeBlock.RotateClockwise();                
 
                 // Quick GameOver debug cheat
-                if (inputHelper.KeyDown(Microsoft.Xna.Framework.Input.Keys.NumPad0))
-                {
-                    GameOver();
-                }
+                if (inputHelper.KeyDown(Microsoft.Xna.Framework.Input.Keys.NumPad0))                
+                    GameOver();                
                 break;
 
             case GameState.GameMenu:
 
-                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Escape))
-                {
-                    CloseGameMenu();
-                }
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Escape))                
+                    CloseGameMenu();                
 
                 if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Space))
                 {
@@ -153,23 +135,17 @@ class GameWorld
 
             case GameState.GameOver:
 
-                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Space))
-                {
-                    GameStart();
-                }
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Space))                
+                    GameStart();                
 
-                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Escape))
-                {
-                    GameHomescreen();
-                }
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Escape))                
+                    GameHomescreen();                
                 break;
         }
     }
 
     public void Update(GameTime gameTime)
     {
-
-
         switch (gameState)
         {
             case GameState.Start:
@@ -184,10 +160,12 @@ class GameWorld
                     ResetBlockTimer();
                 }
 
-                if (activeBlock == null)
+                if (activeBlock == null) //M: TODO: Check of er al een block is. 
                 {
                     activeBlock = queuedBlock;
                     NewBlock();
+                    if (grid.CheckSpawn(activeBlock))
+                        GameOver();
                 }
                 break;
 
@@ -239,13 +217,14 @@ class GameWorld
         blockTimer = (float)(1 - 0.2 * Math.Pow(level, 0.5));
     }
 
-    private void ResetSettings() // Stelt standaard settings in.
+    /*
+    private void ResetSettings() // Stelt standaard settings in. //M: Onderaan staat al Reset()
     {
         level = 1;
         score = 0;
-    }
+    }*/
 
-    // Methodes that handle the gamestate
+    // Methods that handle the gamestate
     private void GameHomescreen()
     {
         gameState = GameState.Start;
@@ -279,7 +258,6 @@ class GameWorld
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         spriteBatch.Begin();
-
         grid.Draw(gameTime, spriteBatch);
 
         switch (gameState)
@@ -297,6 +275,9 @@ class GameWorld
                 break;
 
             case GameState.GameOver:
+                spriteBatch.DrawString(font, "Game Over", new Vector2(97, 4), Color.Blue);
+                spriteBatch.DrawString(font, "Level = " + level, new Vector2(97, 34), Color.Blue);
+                spriteBatch.DrawString(font, "Score = " + score, new Vector2(97, 64), Color.Blue);
                 break;
         }
 
@@ -314,6 +295,10 @@ class GameWorld
 
     public void Reset()
     {
+        level = 1;
+        score = 0;
+        TetrisGame.gameWorld.activeBlock = null;
+        grid.Clear();
+        GameHomescreen();
     }
-
 }

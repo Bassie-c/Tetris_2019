@@ -24,7 +24,6 @@ class TetrisGrid
     /// <summary>
     /// Creates a new TetrisGrid.
     /// </summary>
-    /// <param name="b"></param>
     public TetrisGrid()
     {
         emptyCell = TetrisGame.ContentManager.Load<Texture2D>("block");
@@ -40,7 +39,6 @@ class TetrisGrid
     /// <param name="spriteBatch">The SpriteBatch used for drawing sprites and text.</param>
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        // Teken grid
         for (int i = 0; i < Width; i++)
         {
             position.X = i * emptyCell.Width;
@@ -50,15 +48,6 @@ class TetrisGrid
                 spriteBatch.Draw(emptyCell, position, colorGrid[i,j]);
             }
         }
-    }
-
-
-    public void PlaceBlock(TetrisBlock block)
-    {
-        for (int i = 0; i < block.block.GetLength(0); i++)
-            for (int j = 0; j < block.block.GetLength(1); j++)
-                if (block.block[i, j])
-                    colorGrid[((int)position.X) + i, ((int)position.Y) + j] = block.color;            
     }
 
     public bool CheckBlock(int xChange, int yChange)
@@ -81,19 +70,40 @@ class TetrisGrid
                 if (block.block[x, y])
                     colorGrid[block.x + x, block.y + y] = block.color;       
         TetrisGame.gameWorld.activeBlock = null;
-        CheckRow();
+        CheckRow(block);
     }
 
-    public void CheckRow()
+    /// <summary>
+    /// Checkt of rijen leeg zijn en haalt ze zo nodig weg.
+    /// </summary>
+    /// <param name="block"></param>
+    public void CheckRow(TetrisBlock block)
     {
+        int rowsCleared = 0;
         for (int i = 0; i < Height; i++)
             if (IsRowFull(i))
             {
                 RemoveRow(i);
-                GivePoints(1);
+                rowsCleared++;
             }
-                
+        GivePoints(rowsCleared);
     }
+
+    /*     
+    //Processorefficiënter, maar minder leesbaar. Checkt alleen de rijen van het geplaatste block.
+    public void CheckRow(TetrisBlock block)
+    {
+        int rowsCleared = 0;
+        for (int i = block.y; i < block.y + block.block.GetLength(1); i++)
+            if (IsRowFull(i))
+            {
+                RemoveRow(i);
+                rowsCleared++;
+            }
+        GivePoints(rowsCleared);
+    }
+    */
+
     /// <summary>
     /// Checks if a row is full. 
     /// </summary>
@@ -101,14 +111,16 @@ class TetrisGrid
     /// <returns></returns>
     public bool IsRowFull(int j)
     {
-        for (int i = 0; i < Width; i++)
-            {
+        for (int i = 0; i < Width; i++)            
                 if (colorGrid[i, j] == Color.White)
-                    return false;
-            }
+                    return false;            
         return true;              
     }
 
+    /// <summary>
+    /// Haalt een rij weg.
+    /// </summary>
+    /// <param name="y"></param>
     public void RemoveRow(int y)
     {
         for (int i = 0; i < Width; i++)
@@ -141,6 +153,19 @@ class TetrisGrid
                 TetrisGame.gameWorld.Score += 2000;
                 break;
         }
+    }
+    /// <summary>
+    /// Checkt of er al een block bovenaan zit.
+    /// </summary>
+    /// <param name="block"></param>
+    /// <returns></returns>
+    public bool CheckSpawn(TetrisBlock block)
+    {
+        for (int i = block.x; i < block.x + block.block.GetLength(0); i++)
+            for (int j = 0; j < block.block.GetLength(1); j++)
+                if (block.block[i - block.x, j] && (colorGrid[i, j] != Color.White))
+                    return true;
+        return false;
     }
 
     /// <summary>
