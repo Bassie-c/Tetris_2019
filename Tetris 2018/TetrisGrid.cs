@@ -105,7 +105,7 @@ class TetrisGrid
     */
 
     /// <summary>
-    /// Checks if a row is full. 
+    /// Checkt of een rij vol is. 
     /// </summary>
     /// <param name="j"></param>
     /// <returns></returns>

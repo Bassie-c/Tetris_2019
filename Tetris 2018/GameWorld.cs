@@ -298,6 +298,7 @@ class GameWorld
         level = 1;
         score = 0;
         TetrisGame.gameWorld.activeBlock = null;
+        TetrisGame.gameWorld.queuedBlock = null;
         grid.Clear();
         GameHomescreen();
     }
