@@ -7,13 +7,12 @@ class TetrisGame : Game
 {
     SpriteBatch spriteBatch;
     InputHelper inputHelper;
-    public static GameWorld gameWorld; //TODO: Waarom moet dit statisch zijn?
+    public static GameWorld gameWorld;
 
     /// <summary>
     /// A static reference to the ContentManager object, used for loading assets.
     /// </summary>
-    public static ContentManager ContentManager { get; private set; }
-    
+    public static ContentManager ContentManager { get; private set; }    
 
     /// <summary>
     /// A static reference to the width and height of the screen.
@@ -53,7 +52,7 @@ class TetrisGame : Game
 
         // create and reset the game world
         gameWorld = new GameWorld();
-        gameWorld.Reset();
+        //gameWorld.Reset();
     }
 
     protected override void Update(GameTime gameTime)
@@ -63,10 +62,8 @@ class TetrisGame : Game
         gameWorld.Update(gameTime);
 
         // EXIT shortcut
-        if (inputHelper.KeyDown(Microsoft.Xna.Framework.Input.Keys.Multiply))
-        {
-            Exit();
-        }
+        if (inputHelper.KeyDown(Microsoft.Xna.Framework.Input.Keys.Multiply))        
+            Exit();        
     }
 
     protected override void Draw(GameTime gameTime)

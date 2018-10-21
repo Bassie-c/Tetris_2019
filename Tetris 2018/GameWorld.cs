@@ -42,6 +42,12 @@ class GameWorld
     /// </summary>
     int score;
 
+    public int Score
+    {
+        get { return score; }
+        set { score = value; }
+    }
+
     /// <summary>
     /// The block that can be controlled by the player.
     /// </summary>
@@ -50,7 +56,7 @@ class GameWorld
     /// <summary>
     /// The next block to be active.
     /// </summary>
-    TetrisBlock queuedBlock;
+    public TetrisBlock queuedBlock;
 
     /// <summary>
     /// The timer for moving the block down.
@@ -60,7 +66,7 @@ class GameWorld
     /// <summary>
     /// The current level the player is playing at.
     /// </summary>
-    int level;
+    public int level;
 
     /// <summary>
     /// The timer that keeps track of how long the active song will last.
@@ -76,12 +82,10 @@ class GameWorld
     {
         random = new Random();
         gameState = GameState.Start;
-
+        grid = new TetrisGrid();           
         font = TetrisGame.ContentManager.Load<SpriteFont>("SpelFont");
         gameOver = TetrisGame.ContentManager.Load<SoundEffect>("GameOver");
-
         grid = new TetrisGrid();
-
         MediaPlayer.Volume = 0.1f;
     }
 
@@ -103,55 +107,37 @@ class GameWorld
 
             case GameState.Playing:
 
-                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Escape))
-                {
-                    OpenGameMenu();
-                }
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Escape))                
+                    OpenGameMenu();                
 
-                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Left))
-                {
-                    activeBlock.MoveLeft();
-                }
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Left))                
+                    activeBlock.MoveLeft();                
 
-                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Right))
-                {
-                    activeBlock.MoveRight();
-                }
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Right))                
+                    activeBlock.MoveRight();                
 
-                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Down))
-                {
-                    activeBlock.MoveDown();
-                }
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Down))                
+                    activeBlock.MoveDown();                
 
-                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Up))
-                {
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Up))                
                     while (activeBlock != null)
-                        activeBlock.MoveDown();
-                }
+                        activeBlock.MoveDown();                
 
-                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.A))
-                {
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.A))                
                     activeBlock.RotateCounterclockwise();
-                }
 
-                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.D))
-                {
-                    activeBlock.RotateClockwise();
-                }
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.D))                
+                    activeBlock.RotateClockwise();                
 
                 // Quick GameOver debug cheat
-                if (inputHelper.KeyDown(Microsoft.Xna.Framework.Input.Keys.NumPad0))
-                {
-                    GameOver();
-                }
+                if (inputHelper.KeyDown(Microsoft.Xna.Framework.Input.Keys.NumPad0))                
+                    GameOver();                
                 break;
 
             case GameState.GameMenu:
 
-                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Escape))
-                {
-                    CloseGameMenu();
-                }
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Escape))                
+                    CloseGameMenu();                
 
                 if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Space))
                 {
@@ -162,15 +148,11 @@ class GameWorld
 
             case GameState.GameOver:
 
-                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Space))
-                {
-                    GameStart();
-                }
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Space))                
+                    GameStart();                
 
-                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Escape))
-                {
-                    GameHomescreen();
-                }
+                if (inputHelper.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Escape))                
+                    GameHomescreen();                
                 break;
         }
     }
@@ -196,6 +178,8 @@ class GameWorld
                 {
                     activeBlock = queuedBlock;
                     NewBlock();
+                    if (grid.CheckSpawn(activeBlock))
+                        GameOver();
                 }
                 MusicPlayer(gameTime);
                 break;
@@ -271,12 +255,7 @@ class GameWorld
         blockTimer = (float)(1 - 0.2 * Math.Pow(level, 0.5));
     }
 
-    private void ResetSettings() // Stelt standaard settings in.
-    {
-
-    }
-
-    // Methodes that handle the gamestate
+    // Methods that handle the gamestate
     private void GameHomescreen()
     {
         gameState = GameState.Start;
@@ -284,9 +263,13 @@ class GameWorld
 
     private void GameStart()
     {
+        grid.Clear();
+        TetrisGame.gameWorld.activeBlock = null;
+        TetrisGame.gameWorld.queuedBlock = null;
         NewBlock();
         activeBlock = queuedBlock;
         NewBlock();
+        score = 0;
         level = 1;
         ResetBlockTimer();
         gameState = GameState.Playing;
@@ -313,10 +296,11 @@ class GameWorld
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         spriteBatch.Begin();
+
         switch (gameState)
         {
             case GameState.Start:
-                spriteBatch.DrawString(font, "Hoofdmenu", Vector2.Zero, Color.Blue);
+                spriteBatch.DrawString(font, "Startscherm", new Vector2(97, 0), Color.Blue);
                 break;
 
             case GameState.Playing:
@@ -328,6 +312,9 @@ class GameWorld
                 break;
 
             case GameState.GameOver:
+                spriteBatch.DrawString(font, "Game Over", new Vector2(97, 4), Color.Blue);
+                spriteBatch.DrawString(font, "Level = " + level, new Vector2(97, 34), Color.Blue);
+                spriteBatch.DrawString(font, "Score = " + score, new Vector2(97, 64), Color.Blue);
                 break;
         }
 
@@ -342,9 +329,4 @@ class GameWorld
             spriteBatch.DrawString(font, "Level: " + level, new Vector2(500, 40), Color.Blue);
         }
     }
-
-    public void Reset()
-    {
-    }
-
 }

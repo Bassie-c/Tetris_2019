@@ -38,12 +38,6 @@
 /processorParam:Quality=Best
 /build:GameOver.wav
 
-#begin LevelUp.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:LevelUp.wav
-
 #begin PlaceBlock_1.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -85,4 +79,10 @@
 /processor:SongProcessor
 /processorParam:Quality=Best
 /build:Sunstroke.mp3
+
+#begin LevelUp.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:LevelUp.wav
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>F:/Programmeren/AA UU/INFOB1GP/Tetris_2019/Tetris 2018/Content/PlaceBlock_3.wav</SourceFile>
-  <SourceTime>2018-10-21T19:43:04.4435164+02:00</SourceTime>
+  <SourceTime>2018-10-21T21:06:05.8797274+02:00</SourceTime>
   <DestFile>F:/Programmeren/AA UU/INFOB1GP/Tetris_2019/Tetris 2018/Content/bin/Windows/PlaceBlock_3.xnb</DestFile>
-  <DestTime>2018-10-21T19:43:36.5808932+02:00</DestTime>
+  <DestTime>2018-10-21T22:03:00.3629965+02:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

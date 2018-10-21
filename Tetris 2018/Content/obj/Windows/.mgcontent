@@ -7,7 +7,6 @@
     <File>F:/Programmeren/AA UU/INFOB1GP/Tetris_2019/Tetris 2018/Content/SpelFont.spritefont</File>
     <File>F:/Programmeren/AA UU/INFOB1GP/Tetris_2019/Tetris 2018/Content/block.png</File>
     <File>F:/Programmeren/AA UU/INFOB1GP/Tetris_2019/Tetris 2018/Content/GameOver.wav</File>
-    <File>F:/Programmeren/AA UU/INFOB1GP/Tetris_2019/Tetris 2018/Content/LevelUp.wav</File>
     <File>F:/Programmeren/AA UU/INFOB1GP/Tetris_2019/Tetris 2018/Content/PlaceBlock_1.wav</File>
     <File>F:/Programmeren/AA UU/INFOB1GP/Tetris_2019/Tetris 2018/Content/PlaceBlock_2.wav</File>
     <File>F:/Programmeren/AA UU/INFOB1GP/Tetris_2019/Tetris 2018/Content/PlaceBlock_3.wav</File>
@@ -15,5 +14,6 @@
     <File>F:/Programmeren/AA UU/INFOB1GP/Tetris_2019/Tetris 2018/Content/Laendler_in_C_Minor_Hess_68.mp3</File>
     <File>F:/Programmeren/AA UU/INFOB1GP/Tetris_2019/Tetris 2018/Content/Gentle_Breeze.mp3</File>
     <File>F:/Programmeren/AA UU/INFOB1GP/Tetris_2019/Tetris 2018/Content/Sunstroke.mp3</File>
+    <File>F:/Programmeren/AA UU/INFOB1GP/Tetris_2019/Tetris 2018/Content/LevelUp.wav</File>
   </SourceFiles>
 </SourceFileCollection>
