@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>D:/Programmeren/INFOB1GP/Tetris_2019/Tetris 2018/Content/Laendler_in_C_Minor_Hess_68.mp3</SourceFile>
-  <SourceTime>2018-10-17T16:45:36.889867+02:00</SourceTime>
-  <DestFile>D:/Programmeren/INFOB1GP/Tetris_2019/Tetris 2018/Content/bin/Windows/Laendler_in_C_Minor_Hess_68.xnb</DestFile>
-  <DestTime>2018-10-17T16:48:50.6869725+02:00</DestTime>
+  <SourceFile>F:/Programmeren/AA UU/INFOB1GP/Tetris_2019/Tetris 2018/Content/Laendler_in_C_Minor_Hess_68.mp3</SourceFile>
+  <SourceTime>2018-10-21T19:43:04.4245108+02:00</SourceTime>
+  <DestFile>F:/Programmeren/AA UU/INFOB1GP/Tetris_2019/Tetris 2018/Content/bin/Windows/Laendler_in_C_Minor_Hess_68.xnb</DestFile>
+  <DestTime>2018-10-21T19:43:37.3833193+02:00</DestTime>
   <Importer>Mp3Importer</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>SongProcessor</Processor>
@@ -15,6 +15,6 @@
   <Dependencies />
   <BuildAsset />
   <BuildOutput>
-    <string>D:/Programmeren/INFOB1GP/Tetris_2019/Tetris 2018/Content/bin/Windows/Laendler_in_C_Minor_Hess_68.wma</string>
+    <string>F:/Programmeren/AA UU/INFOB1GP/Tetris_2019/Tetris 2018/Content/bin/Windows/Laendler_in_C_Minor_Hess_68.wma</string>
   </BuildOutput>
 </PipelineBuildEvent>
